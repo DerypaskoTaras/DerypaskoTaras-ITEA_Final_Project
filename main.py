@@ -22,7 +22,7 @@ def handle_webhook():
 if __name__ == '__main__':
     from time import sleep
 
-    bot.remowe.webhook()
+    bot.remove.webhook()
     sleep(1)
     bot.set_webhook(
         url=WEBHOOK_URL,
