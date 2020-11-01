@@ -8,7 +8,7 @@ from telebot.types import Update
 app = Flask(__name__)
 
 
-@app.route('/tg/webhook')
+@app.route('/tg/webhook/')
 def handle_webhook():
     if request.content_type == 'application/json':
         data_string = request.get_data().decode('utf-8')
