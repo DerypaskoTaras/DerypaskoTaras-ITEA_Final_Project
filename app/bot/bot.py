@@ -1,5 +1,4 @@
 import json
-import datetime
 from .config import (
     TOKEN,
     CATEGORY_TAG,
