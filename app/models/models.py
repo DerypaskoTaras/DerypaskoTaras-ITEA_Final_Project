@@ -1,6 +1,6 @@
 from collections import Counter
 import mongoengine as me
-from ..bot.utils import get_date
+import datetime
 
 me.connect('TS')
 
@@ -99,7 +99,14 @@ class Supplier(me.Document):
 class News(me.Document):
     title = me.StringField(min_length=2, max_length=256, required=True)
     body = me.StringField(min_length=2, max_length=4096, required=True)
-    created = me.DateTimeField(default=get_date())
+    creation_date = me.DateTimeField()
+    modified_date = me.DateTimeField(default=datetime.datetime.now)
+
+    def save(self, *args, **kwargs):
+        if not self.creation_date:
+            self.creation_date = datetime.datetime.now()
+        self.modified_date = datetime.datetime.now()
+        return super(News, self).save(*args, **kwargs)
 
     @classmethod
     def get_news(cls):
@@ -117,7 +124,7 @@ class Cart(me.Document):
     user = me.ReferenceField(User)
     products = me.ListField(me.ReferenceField(Product))
     is_active = me.BooleanField(default=True)
-    created = me.DateTimeField(default=get_date())
+    created = me.DateTimeField(default=datetime.datetime.now())
 
     def add_product(self, product: Product):
         self.products.append(product)

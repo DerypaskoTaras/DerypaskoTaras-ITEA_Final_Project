@@ -3,7 +3,6 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from .config import CATEGORY_TAG, ADD_TO_CART_TAG, COMPLETE_ORDER_TAG, DELETE_ORDER_TAG
 from .keyboards import START_KB
 from .texts import ADD_TO_CART, PAY_THE_ORDER, DELETE_ORDER
-import datetime
 
 
 def check_message_match(message, text: str):
@@ -49,8 +48,3 @@ def generate_complete_or_delete_order_kb(id_: str):
     complete_button = InlineKeyboardButton(PAY_THE_ORDER, callback_data=complete_data)
     kb.add(delete_button, complete_button)
     return kb
-
-
-def get_date():
-    date = datetime.datetime.now()
-    return date

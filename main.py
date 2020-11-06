@@ -1,7 +1,8 @@
-from .app.bot.bot import bot
 from .app.bot.config import WEBHOOK_URL
 from flask import Flask, request, abort
 from telebot.types import Update
+from .app.bot.bot import bot
+
 # bot.remove_webhook()
 # bot.polling()
 

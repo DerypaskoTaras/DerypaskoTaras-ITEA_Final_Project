@@ -1,4 +1,5 @@
 import json
+import datetime
 from .config import (
     TOKEN,
     CATEGORY_TAG,
@@ -48,7 +49,7 @@ def show_news(message):
             message.chat.id,
             f'{news.title}\n'
             f'{news.body}\n'
-            f'{news.created}'
+            f'{news.modified_date.strftime("%Y.%m.%d %H:%M:%S")}'
         )
 
 
