@@ -1,5 +1,5 @@
-from app.bot.bot import bot
-from app.bot.config import WEBHOOK_URL
+from IteaProject.app.bot.bot import bot
+from IteaProject.app.bot.config import WEBHOOK_URL
 from flask import Flask, request, abort
 from telebot.types import Update
 # bot.remove_webhook()
