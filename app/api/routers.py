@@ -12,4 +12,4 @@ api.add_resource(res.CartResources, '/carts', '/carts/<carts_id>')
 api.add_resource(res.NewsResources, '/news', '/news/<news_id>')
 api.add_resource(res.SuppliersResources, '/suppliers', '/suppliers/<supplier_id>')
 
-app.run(host='127.0.0.1', port=8000, debug=True)
+app.run(host='127.0.0.1', port=27018, debug=True)
