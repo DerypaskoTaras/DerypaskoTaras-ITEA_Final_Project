@@ -1,8 +1,9 @@
 import json
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-from .config import CATEGORY_TAG, ADD_TO_CART_TAG, ADD_TAG, DEL_TAG
+from .config import CATEGORY_TAG, ADD_TO_CART_TAG, COMPLETE_ORDER_TAG, DELETE_ORDER_TAG
 from .keyboards import START_KB
-from .texts import ADD_TO_CART, ADD_PRODUCT, DEL_PRODUCT
+from .texts import ADD_TO_CART, PAY_THE_ORDER, DELETE_ORDER
+import datetime
 
 
 def check_message_match(message, text: str):
@@ -40,25 +41,16 @@ def generate_add_to_cart_button(id_: str):
     return kb
 
 
-def generate_add_button(id_: str):
+def generate_complete_or_delete_order_kb(id_: str):
     kb = InlineKeyboardMarkup()
-    add_data = get_callback_data(id_, ADD_TAG)
-    add_button = InlineKeyboardButton(ADD_PRODUCT, callback_data=add_data)
-    del_data = get_callback_data(id_, DEL_TAG)
-    del_button = InlineKeyboardButton(DEL_PRODUCT, callback_data=del_data)
-    kb.add(add_button, del_button)
+    delete_data = get_callback_data(id_, DELETE_ORDER_TAG)
+    delete_button = InlineKeyboardButton(DELETE_ORDER, callback_data=delete_data)
+    complete_data = get_callback_data(id_, COMPLETE_ORDER_TAG)
+    complete_button = InlineKeyboardButton(PAY_THE_ORDER, callback_data=complete_data)
+    kb.add(delete_button, complete_button)
     return kb
 
-# def generate_discount_products_kb(discount_products_qs):
-#     buttons = []
-#     kb = InlineKeyboardMarkup()
-#     for dp in discount_products_qs:
-#         data = json.dumps(
-#             {
-#                 'id': str(dp.id)
-#             }
-#         )
-#         buttons.append(InlineKeyboardButton(dp.title, callback_data=data))
-#     kb.add(*buttons)
-#     return kb
 
+def get_date():
+    date = datetime.datetime.now()
+    return date

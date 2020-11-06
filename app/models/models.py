@@ -1,5 +1,6 @@
+from collections import Counter
 import mongoengine as me
-import datetime
+from ..bot.utils import get_date
 
 me.connect('TS')
 
@@ -80,9 +81,9 @@ class User(me.Document):
             cart = Cart.objects.create(user=self)
         return cart
 
-    def show_products_in_cart(self):
+    def get_products_in_cart(self):
         cart = Cart.objects.filter(user=self, is_active=True).first()
-        return cart.products
+        return dict(Counter(cart.products))
 
 
 class Admin(me.Document):
@@ -98,7 +99,11 @@ class Supplier(me.Document):
 class News(me.Document):
     title = me.StringField(min_length=2, max_length=256, required=True)
     body = me.StringField(min_length=2, max_length=4096, required=True)
-    created = me.DateTimeField(default=datetime.datetime.now())
+    created = me.DateTimeField(default=get_date())
+
+    @classmethod
+    def get_news(cls):
+        return cls.objects()
 
 
 class Review(me.Document):
@@ -112,12 +117,19 @@ class Cart(me.Document):
     user = me.ReferenceField(User)
     products = me.ListField(me.ReferenceField(Product))
     is_active = me.BooleanField(default=True)
-    created = me.DateTimeField(default=datetime.datetime.now())
+    created = me.DateTimeField(default=get_date())
 
     def add_product(self, product: Product):
         self.products.append(product)
         self.save()
 
+    def delete_products_in_cart(self):
+        self.products = []
+        self.save()
+
+    # def del_product(self, product: Product):
+    #     self.products.remove(product)
+    #     self.save()
 # cat1 = Category(title='Электроника')
 # cat1.save()
 #
@@ -136,7 +148,7 @@ class Cart(me.Document):
 # p1 = Product(title='Холодильник с морозильной камерой Samsung RB37J5000SA', price=12000, discount=30, description='Samsung RB37J5000SA – практичный и надежный холодильник с классом энергоэффективности A+. Прибор относится к отдельностоящим двухкамерным моделям и оснащен инверторным компрессором. Он заключен в корпус размерами 595x2006x675 мм, предусматривает электронное управление, предоставляет для размещения любых продуктов питания 367 л внутреннего пространства (общий полезный объем). Среди ключевых особенностей Samsung RB37J5000SA отметим наличие системы Multi Flow для равномерного распределения холодного воздуха,'
 #                                                                                                                  ' технологии No Frost, специального контейнера Fresh Zone для идеального хранения мяса и рыбы, регулируемых дверных кармашков и большого выдвижного ящика Full Open Box в морозилке. За эффективное освещение всего содержимого отвечает верхняя LED-лампа. Пользователи быстро найдут то, что им нужно. Если говорить о времени автономного поддержания холода, оно достигает 18 ч.', category=c1)
 # p1.save()
-# file2 = open('holod.png', 'rb')
+# file2 = open('holod.jpeg', 'rb')
 # p1.image.put(file2)
 # p1.save()
 # file2.close()

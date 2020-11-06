@@ -2,5 +2,5 @@ GREETINGS = 'Рады Вас приветствовать в нашем инте
 PICK_CATEGORY = 'Выберите категорию'
 PICK_DISCOUNT_PRODUCT = 'Выберите товар'
 ADD_TO_CART = 'Добавить в корзину'
-ADD_PRODUCT = 'Увеличить к-во'
-DEL_PRODUCT = 'Уменьшить к-во'
+DELETE_ORDER = 'Удалить корзину'
+PAY_THE_ORDER = 'Оплатить заказ'
