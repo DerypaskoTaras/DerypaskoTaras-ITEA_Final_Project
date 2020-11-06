@@ -22,6 +22,8 @@ bot = TeleBot(TOKEN)
 @bot.message_handler(commands=['start'])
 def start(message):
     User.initial_create(message.chat.id, message.from_user.first_name)
+    user = User.objects.get(telegram_id=message.chat.id)
+    user.get_cart()
     kb = ReplyKeyboardMarkup(resize_keyboard=True)
     buttons = [KeyboardButton(button) for button in START_KB.values()]
     kb.add(*buttons)
