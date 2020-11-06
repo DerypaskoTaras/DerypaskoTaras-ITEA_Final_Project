@@ -1,4 +1,4 @@
-from .app.bot.config import WEBHOOK_URL
+from app.bot.config import WEBHOOK_URL
 from flask import Flask, request, abort
 from telebot.types import Update
 from app.bot.bot import bot
