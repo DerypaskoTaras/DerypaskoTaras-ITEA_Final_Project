@@ -9,6 +9,8 @@ from app.bot.bot import bot
 
 app = Flask(__name__)
 
+app_flask.run(host='127.0.0.1', port=27018, debug=True)
+
 
 @app.route('/tg/webhook/', methods=['GET', 'POST'])
 def handle_webhook():
@@ -22,8 +24,6 @@ def handle_webhook():
 
 
 if __name__ == '__main__':
-
-    app_flask.run(host='127.0.0.1', port=27018, debug=True)
 
     from time import sleep
 
