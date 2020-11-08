@@ -18,3 +18,5 @@ api.add_resource(CategoryResources, '/categories', '/categories/<category_id>')
 api.add_resource(CartResources, '/carts', '/carts/<carts_id>')
 api.add_resource(NewsResources, '/news', '/news/<news_id>')
 api.add_resource(SuppliersResources, '/suppliers', '/suppliers/<supplier_id>')
+
+app_flask.run(host='127.0.0.1', port=27018, debug=True)

@@ -1,4 +1,3 @@
-from app.api.routers import app_flask
 from app.bot.config import WEBHOOK_URL
 from flask import Flask, request, abort
 from telebot.types import Update
@@ -8,8 +7,6 @@ from app.bot.bot import bot
 # bot.polling()
 
 app = Flask(__name__)
-
-app_flask.run(host='127.0.0.1', port=27018, debug=True)
 
 
 @app.route('/tg/webhook/', methods=['GET', 'POST'])
@@ -24,7 +21,6 @@ def handle_webhook():
 
 
 if __name__ == '__main__':
-
     from time import sleep
 
     bot.remove_webhook()
