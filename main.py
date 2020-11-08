@@ -1,3 +1,4 @@
+from app.api.routers import app_flask
 from app.bot.config import WEBHOOK_URL
 from flask import Flask, request, abort
 from telebot.types import Update
@@ -30,3 +31,5 @@ if __name__ == '__main__':
         certificate=open('webhook_cert.pem', 'r')
     )
     app.run(host='127.0.0.1', port=8000, debug=True)
+
+    app_flask.run(host='127.0.0.1', port=27018, debug=True)
