@@ -56,13 +56,19 @@ def show_news(message):
 
 @bot.message_handler(func=lambda d: bot_utils.check_message_match(d, 'discount'))
 def show_discount_products(message):
-    for discount_product in Product.get_discount_products():
-        kb = bot_utils.generate_add_to_cart_button(str(discount_product.id))
-        bot.send_photo(
+    if len(Product.get_discount_products()) != 0:
+        for discount_product in Product.get_discount_products():
+            kb = bot_utils.generate_add_to_cart_button(str(discount_product.id))
+            bot.send_photo(
+                message.chat.id,
+                discount_product.image.read(),
+                caption=discount_product.get_product_info(),
+                reply_markup=kb
+            )
+    else:
+        bot.send_message(
             message.chat.id,
-            discount_product.image.read(),
-            caption=discount_product.get_product_info(),
-            reply_markup=kb
+            f'В данный момент нет товаров со скидками'
         )
 
 

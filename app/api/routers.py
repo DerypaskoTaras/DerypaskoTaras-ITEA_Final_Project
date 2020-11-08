@@ -9,8 +9,8 @@ from app.api.resources import (
     SuppliersResources
 )
 
-app_flask = Flask(__name__)
-api = Api(app_flask)
+app = Flask(__name__)
+api = Api(app)
 
 api.add_resource(UserResources, '/users', '/users/<user_id>')
 api.add_resource(ProductResources, '/products', '/products/<product_id>')
@@ -19,4 +19,4 @@ api.add_resource(CartResources, '/carts', '/carts/<carts_id>')
 api.add_resource(NewsResources, '/news', '/news/<news_id>')
 api.add_resource(SuppliersResources, '/suppliers', '/suppliers/<supplier_id>')
 
-app_flask.run(host='127.0.0.1', port=27018, debug=True)
+app.run(host='127.0.0.1', port=27018, debug=True)
