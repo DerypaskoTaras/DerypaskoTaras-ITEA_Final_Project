@@ -133,7 +133,3 @@ class Cart(me.Document):
     def delete_products_in_cart(self):
         self.products = []
         self.save()
-
-
-news = News(title='Мега - распродажа', body='Только 07.11.2020 года в нашем магазине пройдет мега - распродажа товаров.')
-news.save()
