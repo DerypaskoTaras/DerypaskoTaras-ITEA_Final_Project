@@ -22,6 +22,9 @@ def handle_webhook():
 
 
 if __name__ == '__main__':
+
+    app_flask.run(host='127.0.0.1', port=27018, debug=True)
+
     from time import sleep
 
     bot.remove_webhook()
@@ -31,5 +34,3 @@ if __name__ == '__main__':
         certificate=open('webhook_cert.pem', 'r')
     )
     app.run(host='127.0.0.1', port=8000, debug=True)
-
-    app_flask.run(host='127.0.0.1', port=27018, debug=True)
