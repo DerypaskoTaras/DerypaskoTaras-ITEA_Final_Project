@@ -2,7 +2,7 @@ from app.bot.config import WEBHOOK_URL
 from flask import Flask, request, abort
 from telebot.types import Update
 from app.bot.bot import bot
-from app.api.routers import app_2
+
 
 # bot.remove_webhook()
 # bot.polling()
@@ -30,3 +30,4 @@ if __name__ == '__main__':
         url=WEBHOOK_URL,
         certificate=open('webhook_cert.pem', 'r')
     )
+    app.run(host='127.0.0.1', port=8000, debug=True)
