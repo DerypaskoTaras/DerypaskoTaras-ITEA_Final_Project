@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from .app.api.resources import (
+from resources import (
     UserResources,
     ProductResources,
     CategoryResources,
