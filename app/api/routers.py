@@ -19,4 +19,5 @@ api.add_resource(CartResources, '/carts', '/carts/<carts_id>')
 api.add_resource(NewsResources, '/news', '/news/<news_id>')
 api.add_resource(SuppliersResources, '/suppliers', '/suppliers/<supplier_id>')
 
-app.run(host='127.0.0.1', port=27018, debug=True)
+if __name__ == "__main__":
+    app.run(host='127.0.0.1', port=27018, debug=True)
