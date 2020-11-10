@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask_restful import request
-from models.models import User, Product, Category, Cart, News, Supplier
+from app.models.models import User, Product, Category, Cart, News, Supplier
 import json
 
 
