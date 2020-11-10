@@ -30,6 +30,3 @@ if __name__ == '__main__':
         url=WEBHOOK_URL,
         certificate=open('webhook_cert.pem', 'r')
     )
-    app.run(host='127.0.0.1', port=8000, debug=True)
-
-    app_2.run(host='127.0.0.1', port=27018, debug=True)
