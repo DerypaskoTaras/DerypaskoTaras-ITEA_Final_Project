@@ -1,4 +1,4 @@
-from .app.models.models import Category, Product, Supplier, Parameters
+from app.models.models import Category, Product, Supplier, Parameters
 
 
 def add_photo(object_, photo):
