@@ -124,13 +124,6 @@ class News(me.Document):
         return cls.objects()
 
 
-class Review(me.Document):
-    rating = me.IntField(min_value=0, max_value=10)
-    comment = me.StringField(min_length=1, max_length=256)
-    product = me.ReferenceField(Product)
-    user = me.ReferenceField(User)
-
-
 class Cart(me.Document):
     user = me.ReferenceField(User)
     products = me.ListField(me.ReferenceField(Product))
