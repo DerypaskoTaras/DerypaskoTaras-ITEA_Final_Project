@@ -2,7 +2,7 @@ from collections import Counter
 import mongoengine as me
 import datetime
 
-me.connect('TS')
+me.connect('TS1')
 
 
 class Category(me.Document):
@@ -43,7 +43,7 @@ class Product(me.Document):
     in_stock = me.BooleanField(default=True)
     category = me.ReferenceField(Category)
     supplier = me.ReferenceField('Supplier')
-    image = me.FileField(required=True)
+    image = me.FileField()
     parameters = me.EmbeddedDocumentField(Parameters)
 
     @classmethod

@@ -75,7 +75,6 @@ def show_discount_products(message):
 @bot.message_handler(func=lambda c: bot_utils.check_message_match(c, 'cart'))
 def show_products_in_cart(message):
     products_in_cart = User.get_products_in_cart(message.chat.id)
-    len(products_in_cart)
     if len(products_in_cart) == 0:
         bot.send_message(
             message.chat.id,
@@ -112,13 +111,19 @@ def categories(call):
             reply_markup=kb
         )
     else:
-        for product in category.get_products():
-            kb = bot_utils.generate_add_to_cart_button(str(product.id))
-            bot.send_photo(
+        if len(category.get_products()) != 0:
+            for product in category.get_products():
+                kb = bot_utils.generate_add_to_cart_button(str(product.id))
+                bot.send_photo(
+                    call.message.chat.id,
+                    product.image.read(),
+                    caption=product.get_product_info(),
+                    reply_markup=kb
+                )
+        else:
+            bot.send_message(
                 call.message.chat.id,
-                product.image.read(),
-                caption=product.get_product_info(),
-                reply_markup=kb
+                f'В этой категории еще нет товаров'
             )
 
 
