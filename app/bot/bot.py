@@ -111,19 +111,13 @@ def categories(call):
             reply_markup=kb
         )
     else:
-        if len(category.get_products()) != 0:
-            for product in category.get_products():
-                kb = bot_utils.generate_add_to_cart_button(str(product.id))
-                bot.send_photo(
-                    call.message.chat.id,
-                    product.image.read(),
-                    caption=product.get_product_info(),
-                    reply_markup=kb
-                )
-        else:
-            bot.send_message(
+        for product in category.get_products():
+            kb = bot_utils.generate_add_to_cart_button(str(product.id))
+            bot.send_photo(
                 call.message.chat.id,
-                f'В этой категории еще нет товаров'
+                product.image.read(),
+                caption=product.get_product_info(),
+                reply_markup=kb
             )
 
 
