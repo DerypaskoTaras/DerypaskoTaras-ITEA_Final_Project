@@ -2,7 +2,7 @@ from collections import Counter
 import mongoengine as me
 import datetime
 
-me.connect('TS1')
+me.connect('TS')
 
 
 class Category(me.Document):
