@@ -2,12 +2,12 @@ from collections import Counter
 import mongoengine as me
 import datetime
 
-me.connect('TS')
+me.connect('TelegramShop')
 
 
 class Category(me.Document):
     title = me.StringField(min_length=2, max_length=128, required=True)
-    description = me.StringField(max_length=2048)
+    description = me.StringField(max_length=1024)
     parent = me.ReferenceField('self')
     subcategories = me.ListField(me.ReferenceField('self'))
 
@@ -37,7 +37,7 @@ class Parameters(me.EmbeddedDocument):
 
 class Product(me.Document):
     title = me.StringField(min_length=2, max_length=128, required=True)
-    description = me.StringField(max_length=2048)
+    description = me.StringField(max_length=1024)
     price = me.DecimalField(force_string=True, required=True, min_value=0)
     discount = me.IntField(min_value=0, max_value=100, default=0)
     in_stock = me.BooleanField(default=True)
