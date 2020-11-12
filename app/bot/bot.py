@@ -101,6 +101,7 @@ def show_products_in_cart(message):
 
 @bot.callback_query_handler(func=lambda c: bot_utils.check_call_tag_match(c, CATEGORY_TAG))
 def categories(call):
+    print(call.message.chat.id)
     category = Category.objects.get(id=json.loads(call.data)['id'])
     if category.subcategories:
         kb = bot_utils.generate_categories_kb(category.subcategories)
