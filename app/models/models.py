@@ -50,9 +50,20 @@ class Product(me.Document):
     def get_discount_products(cls):
         return cls.objects(discount__gt=0)
 
+    def get_products_parameters(self):
+        if self.parameters:
+            return f'Характеристики :\n' \
+                   f'ширина - {self.parameters.width} см.\n' \
+                   f'высота - {self.parameters.height} см.\n' \
+                   f'вес - {self.parameters.weight} кг.\n' \
+                   f'мощность - {self.parameters.power} Вт'
+        return f'Характеристики : нет данных'
+
     def get_product_info(self):
-        product_info = f'{self.title}\nОписание :\n{self.description}' \
-                       f'\nХарактеристики :\n{self.parameters}'
+        product_info = f'{self.title}\n' \
+                       f'Описание :\n' \
+                       f'{self.description}\n' \
+                       f' {self.get_products_parameters()}'
         if self.discount > 0:
             discount_price = (self.price - (self.price / 100) * self.discount)
             return product_info + f'\nСтарая цена : {self.price}\nЦена со скидкой : {discount_price}'

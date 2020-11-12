@@ -101,7 +101,6 @@ def show_products_in_cart(message):
 
 @bot.callback_query_handler(func=lambda c: bot_utils.check_call_tag_match(c, CATEGORY_TAG))
 def categories(call):
-    print(call.message.chat.id)
     category = Category.objects.get(id=json.loads(call.data)['id'])
     if category.subcategories:
         kb = bot_utils.generate_categories_kb(category.subcategories)
@@ -112,13 +111,19 @@ def categories(call):
             reply_markup=kb
         )
     else:
-        for product in category.get_products():
-            kb = bot_utils.generate_add_to_cart_button(str(product.id))
-            bot.send_photo(
+        if len(category.get_products()) != 0:
+            for product in category.get_products():
+                kb = bot_utils.generate_add_to_cart_button(str(product.id))
+                bot.send_photo(
+                    call.message.chat.id,
+                    product.image.read(),
+                    caption=product.get_product_info(),
+                    reply_markup=kb
+                )
+        else:
+            bot.send_message(
                 call.message.chat.id,
-                product.image.read(),
-                caption=product.get_product_info(),
-                reply_markup=kb
+                f'В данной категории еще нет товаров'
             )
 
 
